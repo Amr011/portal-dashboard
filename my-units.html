@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="./style/theme.css">
+    <link rel="stylesheet" href="./style/my-units.css">
+
+</head>
+
+<body>
+    <style>
+        .sidebar-mobile-overlay {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: absolute;
+            background-color: #000;
+            z-index: 999;
+            opacity: 50%;
+        }
+
+        .sidebar-menu-mobile-btn {
+            display: none;
+            /* position: absolute;
+            z-index: 999;
+            width: 100%; */
+            padding: 4px 8px;
+            background-color: gray;
+            color: #fff;
+            margin-right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .top-right-nav {
+                display: none;
+            }
+
+            .sidebar-mobile {
+                position: absolute !important;
+                z-index: 9999;
+            }
+        }
+    </style>
+
+
+    <!-- #main-container -->
+    <div class="container-main" x-data="{open : false}">
+        <!-- #sidebar -->
+
+        <!-- #mobile-top-bar -->
+        <!--                          -->
+        <!-- <======================> -->
+        <div class="sidebar-menu-mobile-btn" x-on:click="open = true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list "
+                style="display: flex; margin-top: 4px; margin-bottom: 4px;" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </div>
+        <!-- <======================> -->
+        <!--                          -->
+        <!-- ##mobile-top-bar -->
+
+        <!-- <div class="sidebar-mobile-overlay" x-show="open == true"></div> -->
+        <div class="sidebar" style="position: relative;" x-bind:class="open ? 'sidebar-open ' : ' -sidebar-open'">
+            <div class="sticky-sidebar">
+                <div class="sidebar-inner sidebar-inner-mobile" style="position: absolute; top:5%;"
+                    x-on:click="open = !open" x-bind:class="open ? 'sidebar-inner-open' : '-sidebar-inner-open'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-list " style="display: flex; margin-top: 4px; margin-bottom: 4px;"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </div>
+                <!-- #logo -->
+                <div class="logo ">
+                    <h1 class="logo-title " style="font-weight: 800;">
+                        <span class="" x-bind:class="open ? 'logo-title-block' : 'logo-title-hidden'">Property
+                            Watch</span>
+                        <span class="" x-bind:class="open ? 'logo-title-hidden' : 'logo-title-block'">PW</span>
+                    </h1>
+                    <h3 class="logo-subtitle " x-bind:class="open ? 'logo-subtitle-open' : '-logo-subtitle-open '">Real
+                        Estate</h3>
+                </div>
+                <!-- ##logo -->
+                <!-- #navigation -->
+                <div class="navigation">
+                    <ul class="navigation-inner " x-data="
+                    {
+                        navigation: [
+                            { title: `My Dashboard`, icon:'data.svg', link:'/', isActive: false },
+                            { title:`My Units (landlord)`, icon:'home_alt_outline.svg', link:'/my-units.html', isActive: true },
+                            { title: `Tenancy Contract`, icon:'coolicon.svg', isActive: false },
+                            { title:`Rent Claims`, icon:'rent_claims.svg', isActive: false },
+                            { title: `Maintenance Request`, icon:'Bill.svg', isActive: false },
+                            { title:`Request History`, icon:'clock.svg', isActive: false },
+                            { title: `Add New Request`, icon:'file_new.svg', isActive: false },
+                            { title:`Settings`, icon:'Settings.svg', isActive: false }
+                        ]
+                    }
+                    ">
+                        <template x-for="nav in navigation">
+                            <li class="nav-item " x-bind:class="open ? 'nav-open' : '-nav-open'">
+                                <a x-bind:class="nav.isActive ? 'nav-item-open  ' : '-nav-item-open  '"
+                                    class="nav-item-link  " x-bind:href="nav.link"><img class="nav-item-icon "
+                                        x-bind:src="'./images/sidebar-icons/' + nav.icon">
+                                    <span x-text="nav.title" class="nav-item-text "
+                                        x-bind:class="open ? 'nav-item-text-open ' : '-nav-item-text-open '">
+                                    </span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                    <!-- #logout -->
+                    <div class="logout-btn ">
+                        <div class="logout-btn-inner ">
+                            <img src="./images/sidebar-icons/logout.svg" class="logout-btn-icon " />
+                            <p class="logout-btn-text "
+                                x-bind:class="open ? 'logout-btn-text-open' : '-logout-btn-text-open'">Logout</p>
+                        </div>
+                    </div>
+                    <!-- ##logout -->
+                </div>
+                <!-- ##navigation -->
+            </div>
+        </div>
+        <!-- ##sidebar -->
+
+
+
+        <!-- #body-conainer -->
+        <div class="body-container">
+
+            <!-- #top-nav-bar -->
+            <div class="top-nav-bar  ">
+
+                <!-- #top-nav-bar-content -->
+                <div class="top-nav-bar-content ">
+                    <!-- #top-left-nav -->
+                    <div class="top-left-nav ">
+                        <h2 class="top-left-nav-message ">Hello Amr</h2>
+                        <div class="top-left-nav-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd"
+                                    d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            <h3>May 19, 2023</h3>
+                        </div>
+                    </div>
+                    <!-- ##top-left-nav -->
+                    <!-- #top-right-nav -->
+                    <div class="top-right-nav ">
+                        <!-- #notification-wedgit -->
+                        <div class="notification-wedgit ">
+                            <img style="width: 100%; height: 100%; display: flex; padding: 1px;"
+                                src="./images/notification-icon.svg" />
+                        </div>
+                        <!-- ##notification-wedgit -->
+                        <!-- #user-wedgit -->
+                        <div class="user-wedgit ">
+                            <img src="https://uploads-ssl.webflow.com/6280c85357254f19cf3acf58/628d4e76a32f747e4fce605b_AmrBlackAndWhitePhoto%206-p-500.png"
+                                class="user-photo border-2 object-cover rounded-full w-[32px] h-[32px]"
+                                alt="Hello WOrld">
+                            <div class="user-content " style="display: grid;">
+                                <span class="user-name " style="line-height: normal;">Amr Aboras</span>
+                                <span class="user-cta " style="line-height: normal;">View profile</span>
+                            </div>
+                        </div>
+                        <!-- ##user-wedgit -->
+                        <!-- #three-dots-wedgit -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-three-dots-vertical three-dots-wedgit" viewBox="0 0 16 16">
+                            <path
+                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        </svg>
+                        <!-- ##three-dots-wedgit -->
+
+                    </div>
+                    <!-- ##top-right-nav -->
+                </div>
+                <!-- #top-nav-bar-content -->
+            </div>
+            <!-- #top-nav-bar -->
+            <!-- #main-container -->
+            <div class=" main-container" x-data="{ mode: 'table' }">
+                <!-- #main-controle -->
+                <div class="main-controle">
+                    <form action="" class="controle-search" method="get">
+                        <img src="./images/search-icon.svg" alt="">
+                        <input type="text" placeholder="Search" name="" id="">
+                    </form>
+                    <div class="display-units-cta">
+                        <div x-on:click="mode = 'table'"
+                            x-bind:style=" mode == 'table' ? 'box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);' : 'box-shadow:none'">
+                            <img src="./images/table-icon.svg" alt="">
+                        </div>
+
+                        <div x-on:click="mode = 'list'"
+                            x-bind:style=" mode == 'list' ? 'box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);' : 'box-shadow:none'">
+                            <img src="./images/list-icon.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!-- ##main-controle -->
+
+                <!-- #data-section -->
+                <div>
+
+                    <div x-show="mode == 'list'">
+                        <div class="data-list-view" x-data="{rows:[1,2,3,4,5,6,7,8]}">
+                            <template x-for="row in rows">
+                                <div class="list-item-row" style="margin-bottom: 32px;">
+                                    <div class="list-item-card">
+                                        <img src="./images/thumbnails/1.png" alt="">
+                                        <div class="card-content">
+                                            <h2>Jumeirah Bay X1, Jumeirah lake towers</h2>
+                                            <div class="card-info">
+                                                <div class="card-info-item">
+                                                    <div class="card-info-item-content">
+                                                        <p>Unit Number</p>
+                                                        <span>3046</span>
+                                                    </div>
+                                                    <div class="unit-status">
+                                                        <p>Unit status</p>
+                                                        <span>Reneted</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-info-item">
+                                                    <div class="card-info-item-content">
+                                                        <p>Unit Type</p>
+                                                        <span>Parking</span>
+                                                    </div>
+                                                    <div class="unit-status">
+                                                        <p>Next Payment</p>
+                                                        <span>5/1/2025</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-info-item">
+                                                    <div class="card-info-item-content">
+                                                        <p>Bedrooms</p>
+                                                        <span>3</span>
+                                                    </div>
+                                                    <div class="unit-status">
+                                                        <p>Till Date</p>
+                                                        <span>5/1/2025</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-info-item">
+                                                    <div class="card-info-item-content">
+                                                        <p>Size Sqm</p>
+                                                        <span>--</span>
+                                                    </div>
+                                                    <div class="unit-status">
+                                                        <p>Balance</p>
+                                                        <span>352</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-info-item">
+                                                    <div class="card-info-item-content">
+                                                        <p>Size Sqm</p>
+                                                        <span>--</span>
+                                                    </div>
+                                                    <div class="unit-status  "
+                                                        style="background-color:  rgba(255, 206, 7, 0.6); color: black;">
+                                                        <p>Rent AED</p>
+                                                        <span style="color: black;">120,000</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-extended">
+                                        <p>
+                                            Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
+                                            libero
+                                            et
+                                            velit interdum, ac
+                                            aliquet odio
+                                            mattis.
+                                        </p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <style>
+                        table {
+                            border: 1px solid #ccc;
+                            border-collapse: collapse;
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                            table-layout: fixed;
+                        }
+
+                        table caption {
+                            font-size: 1.5em;
+                            margin: .5em 0 .75em;
+                        }
+
+                        table tr {
+                            background-color: #f8f8f8;
+                            border: 1px solid #ddd;
+                            padding: .35em;
+                        }
+
+                        table th,
+                        table td {
+                            padding: .625em;
+                            text-align: center;
+                        }
+
+                        table th {
+                            font-size: .85em;
+                            letter-spacing: .1em;
+                            text-transform: uppercase;
+                        }
+
+                        @media screen and (max-width: 1080px) {
+                            table {
+                                border: 0;
+                            }
+
+                            table caption {
+                                font-size: 1.3em;
+                            }
+
+                            table tbody {
+                                background-color: white;
+
+                            }
+
+                            table thead {
+                                border: none;
+                                clip: rect(0 0 0 0);
+                                height: 1px;
+                                margin: -1px;
+                                overflow: hidden;
+                                padding: 0;
+                                position: absolute;
+                                width: 1px;
+                            }
+
+                            table tr {
+                                border-bottom: 3px solid #ddd;
+                                display: block;
+                                margin-bottom: .625em;
+                            }
+
+                            table td {
+                                border-bottom: 1px solid #ddd;
+                                display: block;
+                                font-size: .8em;
+                                text-align: right;
+                            }
+
+                            table td::before {
+
+                                content: attr(data-label);
+                                float: left;
+                                font-weight: bold;
+                                text-transform: uppercase;
+                            }
+
+                            table td:last-child {
+                                border-bottom: 0;
+                            }
+                        }
+                    </style>
+                    <!-- #data-table-view- -->
+                    <div x-show="mode == 'table'">
+                        <!-- #table-view -->
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="border-top-left-radius: 16px;">
+                                        <div class="table-head-col">
+                                            <p>Project</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Area</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Unit Type</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Unit Number</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Number of bedrooms</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Gross Area Sqft</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Unit Status</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Balance</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Till Date</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-head-col">
+                                            <p>Next Payment</p>
+                                            <div>
+                                                <img src="./images/caret-up.svg" class="" alt="">
+                                                <img src="./images/caret-down.svg" class="active-head-col" alt="">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="col" style="border-top-right-radius: 16px;">
+                                        <div class="table-head-col" style="text-align: center;">
+                                            <p>Action</p>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody x-data="{rows:['1','2','3','4','5' ,6 ,7,8]}">
+                                <template x-for="row in rows">
+                                    <tr>
+                                        <td data-label=" Project">Jumeirah Bay X1</td>
+                                        <td data-label=" Area">Jumeirah Lake towers</td>
+                                        <td data-label=" Unit Type">Parking</td>
+                                        <td data-label=" Unit Number">3045</td>
+                                        <td data-label=" Number of bedrooms">-</td>
+                                        <td data-label=" Gross Area Sqft">-</td>
+                                        <td data-label=" Unit Status">Rented</td>
+                                        <td data-label=" Balance">352</td>
+                                        <td data-label=" Till Date">5/1/2021</td>
+                                        <td data-label=" Next Payment">5/1/2024</td>
+
+                                        <td style="text-align: center;">
+                                            <a href="#"
+                                                style="border-radius: 100%; display: flex; width: fit-content;  background-color:#D2F0FF; padding: 4px;">
+                                                <img src="./images/edit-icon.svg" style="   padding: 8px; " alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <!-- and so on... -->
+                            </tbody>
+                        </table>
+                        <!-- ##table-view -->
+                    </div>
+                    <!-- ##data-table-view- -->
+                </div>
+                <!-- ##data-table -->
+            </div>
+            <!-- ##main-container -->
+        </div>
+        <!-- ##body-conainer -->
+    </div>
+    <!-- ##main-container -->
+
+</body>
+
+</html>

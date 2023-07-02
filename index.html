@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+    <link rel="stylesheet" href="./style/theme.css">
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+
+
+
+<body>
+    <!-- #main-container -->
+    <div class="container-main" x-data="{open : false}">
+        <!-- #sidebar -->
+        <div class="sidebar" x-bind:class="open ? 'sidebar-open ' : ' -sidebar-open'">
+            <!-- #sticky-content -->
+            <div class="sticky-sidebar">
+                <div class="sidebar-inner" style="position: absolute; top:5%;" x-on:click="open = !open"
+                    x-bind:class="open ? 'sidebar-inner-open' : '-sidebar-inner-open'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-list " style="display: flex; margin-top: 4px; margin-bottom: 4px;"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </div>
+                <!-- #logo -->
+                <div class="logo ">
+                    <h1 class="logo-title " style="font-weight: 800;">
+                        <span class="" x-bind:class="open ? 'logo-title-block' : 'logo-title-hidden'">Property
+                            Watch</span>
+                        <span class="" x-bind:class="open ? 'logo-title-hidden' : 'logo-title-block'">PW</span>
+                    </h1>
+                    <h3 class="logo-subtitle " x-bind:class="open ? 'logo-subtitle-open' : '-logo-subtitle-open '">Real
+                        Estate</h3>
+                </div>
+                <!-- ##logo -->
+                <!-- #navigation -->
+                <div class="navigation">
+                    <ul class="navigation-inner " x-data="
+                    {
+                        navigation: [
+                            { title: `My Dashboard`, icon:'data.svg', link:'/' , isActive: true },
+                            { title:`My Units (landlord)`, icon:'home_alt_outline.svg', link: '/my-units.html', isActive: false },
+                            { title: `Tenancy Contract`, icon:'coolicon.svg', isActive: false },
+                            { title:`Rent Claims`, icon:'rent_claims.svg', isActive: false },
+                            { title: `Maintenance Request`, icon:'Bill.svg', isActive: false },
+                            { title:`Request History`, icon:'clock.svg', isActive: false },
+                            { title: `Add New Request`, icon:'file_new.svg', isActive: false },
+                            { title:`Settings`, icon:'Settings.svg', isActive: false }
+                        ]
+                    }
+                    ">
+                        <template x-for="nav in navigation">
+                            <li class="nav-item " x-bind:class="open ? 'nav-open' : '-nav-open'">
+                                <a x-bind:class="nav.isActive ? 'nav-item-open  ' : '-nav-item-open  '"
+                                    class="nav-item-link" x-bind:href="nav.link"><img class="nav-item-icon "
+                                        x-bind:src="'./images/sidebar-icons/' + nav.icon">
+                                    <span x-text="nav.title" class="nav-item-text "
+                                        x-bind:class="open ? 'nav-item-text-open ' : '-nav-item-text-open '">
+                                    </span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                    <!-- #logout -->
+                    <div class="logout-btn ">
+                        <div class="logout-btn-inner ">
+                            <img src="./images/sidebar-icons/logout.svg" class="logout-btn-icon " />
+                            <p class="logout-btn-text "
+                                x-bind:class="open ? 'logout-btn-text-open' : '-logout-btn-text-open'">Logout</p>
+                        </div>
+                    </div>
+                    <!-- ##logout -->
+                </div>
+                <!-- ##navigation -->
+            </div>
+            <!-- #sticky-content -->
+        </div>
+        <!-- ##sidebar -->
+        <!-- #body-conainer -->
+        <div class="body-container">
+            <!-- #top-nav-bar -->
+            <div class="top-nav-bar  ">
+                <!-- #top-nav-bar-content -->
+                <div class="top-nav-bar-content ">
+                    <!-- #top-left-nav -->
+                    <div class="top-left-nav ">
+                        <h2 class="top-left-nav-message ">Hello Amr</h2>
+                        <div class="top-left-nav-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd"
+                                    d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            <h3>May 19, 2023</h3>
+                        </div>
+                    </div>
+                    <!-- ##top-left-nav -->
+                    <!-- #top-right-nav -->
+                    <div class="top-right-nav ">
+                        <!-- #notification-wedgit -->
+                        <div class="notification-wedgit ">
+                            <img width="32px" height="32px"
+                                style="width: 100%; height: 100%; display: flex; padding: 1px;"
+                                src="./images/notification-icon.svg" />
+                        </div>
+                        <!-- ##notification-wedgit -->
+                        <!-- #user-wedgit -->
+                        <div class="user-wedgit ">
+                            <img src="https://uploads-ssl.webflow.com/6280c85357254f19cf3acf58/628d4e76a32f747e4fce605b_AmrBlackAndWhitePhoto%206-p-500.png"
+                                class="user-photo border-2 object-cover rounded-full w-[32px] h-[32px]"
+                                alt="Hello WOrld">
+                            <div class="user-content " style="display: grid;">
+                                <span class="user-name " style="line-height: normal;">Amr Aboras</span>
+                                <span class="user-cta " style="line-height: normal;">View profile</span>
+                            </div>
+                        </div>
+                        <!-- ##user-wedgit -->
+                        <!-- #three-dots-wedgit -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-three-dots-vertical three-dots-wedgit" viewBox="0 0 16 16">
+                            <path
+                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        </svg>
+                        <!-- ##three-dots-wedgit -->
+
+                    </div>
+                    <!-- ##top-right-nav -->
+                </div>
+                <!-- #top-nav-bar-content -->
+            </div>
+            <!-- #top-nav-bar -->
+            <!-- #main-container -->
+            <div class=" main-container">
+                <!-- #main-portals -->
+                <div class="main-portals " style=" grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));" x-data="{
+                        portals: [
+                            { title: `My Units`, icon:'my-units.svg', description:'' , link:'/my-units.html', isActive: true },
+                            { title:`Tenancy contract`, icon:'tanancy-contract.svg', description:'', isActive: false },
+                            { title: `Rent Claims`, icon:'rent-claims.svg', description:'', isActive: false },
+                            { title:`Maintenance Request`, icon:'maintance-request.svg', description:'', isActive: false },
+                            { title: `Book Faclities`, icon:'book-facilities.svg', description:'', isActive: false },
+                            { title: `Request History`, icon:'request-history.svg', description:'', isActive: false },
+                            { title:`Add New Request`, icon:'add-new-request.svg', description:'', isActive: false },
+                            { title: `Vehicle`, icon:'vehicle.svg', description:'', isActive: false },
+                            { title:`Statics`, icon:'statics.svg', description:'', isActive:false },
+                            { title:`My Documents`, icon:'my-documents.svg', description:'', isActive:false },
+                            { title:`Latest News`, icon:'latest-news.svg', description:'', isActive:false },
+                            { title:`Blog`, icon:'blog.svg', description:'', isActive:false },
+                            { title:`Emergency Contact`, icon:'emergency-contact.svg', description:'', isActive:false },
+                            { title:`Contact Us`, icon:'contact-us.svg', description:'', isActive:false },
+                        ]
+                    }">
+                    <template x-for="portal in portals">
+                        <!-- #portal-item -->
+                        <a x-bind:href="portal.link" class="portal-item " style="text-decoration: none;">
+                            <div class="portal-item-icon">
+                                <img x-bind:src="'./images/portals-icons/' + portal.icon" />
+                            </div>
+                            <div class=" portal-item-content ">
+                                <p class="portal-item-content-title " style="font-weight: 500;" x-text="portal.title">
+                                </p>
+                                <span class="  portal-item-content-description "
+                                    style=" font-size:15.4px;line-height: 18px;font-weight: 400;">Vorem
+                                    ipsum dolor sit
+                                    amet, consectetur adipiscing
+                                    elit.</span>
+
+                            </div>
+                        </a>
+                        <!-- ##portal-item -->
+                    </template>
+                </div>
+                <!-- #main-portals -->
+            </div>
+            <!-- ##main-container -->
+        </div>
+        <!-- ##body-conainer -->
+    </div>
+    <!-- ##main-container -->
+
+</body>
+
+</html>

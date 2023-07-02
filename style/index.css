@@ -1,0 +1,79 @@
+.main-portals {
+    display: grid;
+    column-gap: 60px;
+    row-gap: 40px;
+    text-align: center
+}
+
+.portal-item {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 2px solid;
+    width: 220px;
+    --tw-border-opacity: 1;
+    border-color: rgb(250 250 250 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 19.2px;
+    padding-bottom: 19.2px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+
+.portal-item:hover {
+    --tw-border-opacity: 1;
+    border: 2px solid rgb(255 206 7 / var(--tw-border-opacity));
+    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.portal-item:hover .portal-item-icon {
+    background-color: rgb(255 206 7 / var(--tw-border-opacity));
+}
+
+.portal-item-icon {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    background-color: #fff;
+    height: 90px;
+    width: 90px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    --tw-bg-opacity: 1;
+    padding: 1rem;
+    font-size: 64px;
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms
+}
+
+.portal-item-icon img {
+    width: 120px;
+    height: 120px;
+}
+
+.portal-item-content {
+    width: 100%;
+}
+
+.portal-item-content-title {
+    margin-top: 28px;
+    font-size: 15.4px;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(19 18 18 / var(--tw-text-opacity))
+}
+
+.portal-item-content-description {
+    --tw-text-opacity: 1;
+    color: rgb(19 18 18 / var(--tw-text-opacity))
+}
